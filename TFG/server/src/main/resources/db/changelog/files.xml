@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+		http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+    <changeSet id="file_create" author="Marc_PS">
+        <createTable tableName="FILES">
+            <column name="id" type="varchar2">
+                <constraints primaryKey="true" />
+            </column>
+            <column name="folder_id" type="varchar2"/>
+            <column name="name" type="varchar">
+                <constraints nullable="false" unique="true" uniqueConstraintName="uc_file_name"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint constraintName="fk_folderOwner"
+                                 baseTableName="FILES"
+                                 baseColumnNames="folder_id"
+                                 referencedTableName="FOLDERS"
+                                 referencedColumnNames="id"/>
+        <createIndex tableName="FILES" indexName="idx_files_name">
+            <column name="name" />
+        </createIndex>
+        <createIndex tableName="FILES" indexName="idx_files_folder">
+            <column name="folder_id" />
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

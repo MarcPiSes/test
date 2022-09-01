@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+		http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+		http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+    <changeSet id="user_create" author="Marc_PS">
+        <createTable tableName="USERS">
+            <column name="id" type="varchar2">
+                <constraints primaryKey="true" primaryKeyName="house_id_pk" />
+            </column>
+            <column name="username" type="varchar2">
+                <constraints unique="true" uniqueConstraintName="uc_username" />
+            </column>
+            <column name="password" type="varchar2">
+                <constraints nullable="false" />
+            </column>
+            <column name="folder_root_id" type="varchar2"/>
+            <column name="token_date" type="DATETIME"/>
+            <column name="token_pc_date" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="insert_user_test"  author="liquibase-Marc_PS">
+        <insert  tableName="USERS">
+            <column  name="id"  value="test-1"/>
+            <column  name="username"  value="test-1"/>
+            <column  name="password"  value="test-1"/>
+        </insert>
+    </changeSet>
+
+
+</databaseChangeLog>
